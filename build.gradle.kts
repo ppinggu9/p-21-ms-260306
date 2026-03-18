@@ -1,0 +1,53 @@
+plugins {
+    java
+    id("org.springframework.boot") version "4.0.3"
+    id("io.spring.dependency-management") version "1.1.7"
+}
+
+group = "com.back"
+version = "0.0.1-SNAPSHOT"
+description = "jump-spring-site-260303"
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom(configurations.annotationProcessor.get())
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation("org.springframework.boot:spring-boot-h2console")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-webmvc")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
+    compileOnly("org.projectlombok:lombok")
+    developmentOnly("org.springframework.boot:spring-boot-devtools")
+    runtimeOnly("com.h2database:h2")
+    annotationProcessor("org.projectlombok:lombok")
+    testImplementation("org.springframework.boot:spring-boot-starter-data-jpa-test")
+    testImplementation("org.springframework.boot:spring-boot-starter-webmvc-test")
+    testImplementation("org.springframework.boot:spring-boot-starter-validation-test")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    //thymeleaf
+    implementation ("org.springframework.boot:spring-boot-starter-thymeleaf")
+    implementation ("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:4.0.0")
+    //security
+    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity6")
+    testImplementation("org.springframework.security:spring-security-test")
+    //markdown
+    implementation("org.commonmark:commonmark:0.21.0")
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
+}
